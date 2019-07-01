@@ -52,7 +52,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Interface
+            Paquete 1
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
@@ -60,14 +60,30 @@
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
-                <span>Paquete 1</span>
+                <span>CU1 Gestionar Usuario</span>
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">Gestionar Usuario</a>
-                    <a class="collapse-item" href="">Cards</a>
+                    <a class="collapse-item" href="">Gestionar Cliente</a>
+                    <a class="collapse-item" href="">Gestionar Proveedor</a>
+                    @if(Auth::user()->isRoot())
+                    <a class="collapse-item" href="">Gestionar Administrativo</a>
+                    @endif
                 </div>
             </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
+                <span>CU2 Gestionar Producto</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
+                <span>CU3 Gestionar Ventas</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
+                <span>CU4 Gestionar Inventarios</span></a>
         </li>
 
         <!-- Nav Item - Utilities Collapse Menu -->

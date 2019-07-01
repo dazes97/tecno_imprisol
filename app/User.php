@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'color'
+         'email', 'password', 'color','root'
     ];
 
     /**
@@ -39,6 +39,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function isRoot()
+    {
+        if ($this->root == '1') {
+            return true;
+        }
+        return false;
+    }
 
 
 
