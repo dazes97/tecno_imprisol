@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientsController extends Controller
 {
@@ -13,7 +16,8 @@ class ClientsController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        return view('users.clients.index')->with('clients', $clients);
     }
 
     /**
@@ -23,7 +27,7 @@ class ClientsController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.clients.create');
     }
 
     /**
@@ -34,7 +38,20 @@ class ClientsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->email = $request->get('email');
+        $user->password = bcrypt($request->get('password'));
+        $user->save();
+        $user = DB::table('users')->latest('id')->first();
+
+        $client = new Client();
+        $client->id = $user->id;
+        $client->name = $request->get('name');
+        $client->phone = $request->get('phone');
+        $client->save();
+
+
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -56,7 +73,8 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $client = Client::find($id);
+        return view('users.clients.edit')->with('client',$client);
     }
 
     /**
@@ -68,7 +86,11 @@ class ClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+        $client->name = $request->get('name');
+        $client->phone = $request->get('phone');
+        $client->save();
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -79,6 +101,12 @@ class ClientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $client = Client::find($id);
+        $client->delete();
+
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('clients.index');
     }
 }

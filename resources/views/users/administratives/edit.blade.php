@@ -12,7 +12,7 @@
             </div>
             <div class="form-group">
                 <label for="telefono">Telefono</label>
-                <input type="text" class="form-control" id="phone" name="phone" value="{{$administrative->phone}}" required>
+                <input type="number" class="form-control" id="phone" name="phone" value="{{$administrative->phone}}" required>
             </div>
             <div class="form-group">
                 <label for="fecha">Fecha de Admision</label>
