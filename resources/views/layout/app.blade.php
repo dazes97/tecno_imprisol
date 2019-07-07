@@ -27,7 +27,7 @@
 <div id="wrapper">
 
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-{{Auth::user()->color}} sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -67,7 +67,7 @@
                     <a class="collapse-item" href="{{route('clients.index')}}">Gestionar Cliente</a>
                     <a class="collapse-item" href="{{route('providers.index')}}">Gestionar Proveedor</a>
                     @if(Auth::user()->isRoot())
-                    <a class="collapse-item" href="{{route('administratives.index')}}">Gestionar Administrativo</a>
+                        <a class="collapse-item" href="{{route('administratives.index')}}">Gestionar Administrativo</a>
                     @endif
                 </div>
             </div>
@@ -340,8 +340,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                            <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{Auth::user()->email}}</span>
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -354,14 +353,14 @@
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item" href="#">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Activity Log
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModa2">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Personalizar
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
+                                Cerrar Sesion
                             </a>
                         </div>
                     </li>
@@ -375,7 +374,7 @@
             <div class="container-fluid">
                 <!-- AQUI VA EL CONTENIDO DE LA PAGINA -->
             @yield('content')
-                <!-- FIN DEL CONTENIDO DE LA PAGINA -->
+            <!-- FIN DEL CONTENIDO DE LA PAGINA -->
             </div>
             <!-- /.container-fluid -->
 
@@ -416,7 +415,7 @@
             </div>
             <div class="modal-body">Seleccione cerrar sesion si desea salir..</div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <form method="post" action="{{route('logout')}}">
                     @csrf
                     <input type="submit" class="btn btn-danger" value="Cerrar Sesion">
@@ -426,6 +425,41 @@
     </div>
 </div>
 
+<div class="modal fade" id="logoutModa2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Personalizacion</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form method="post" action="{{route('color')}}">
+                <div class="modal-body">
+                    @csrf
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Seleccione Color</label>
+                        <select class="form-control" id="color" name="color">
+                            <option value="primary">Azul</option>
+                            <option value="secondary">Gris</option>
+                            <option value="success">Verde</option>
+                            <option value="danger">Rojo</option>
+                            <option value="warning">Amarillo</option>
+                            <option value="dark">Negro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <input type="submit" class="btn btn-danger" value="Guardar">
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</div>
 <!-- Bootstrap core JavaScript-->
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -442,7 +476,6 @@
 <!-- Page level custom scripts -->
 <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
 <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
-
 
 
 </body>

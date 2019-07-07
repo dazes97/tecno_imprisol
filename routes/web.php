@@ -25,6 +25,7 @@ Route::middleware(['root'])->group(function () {
     Route::resource('administratives', 'AdministrativesController');
 });
 
+Route::post('color','UsersController@color')->name('color');
 
 Route::resource('clients', 'ClientsController');
 Route::resource('providers', 'ProvidersController');
