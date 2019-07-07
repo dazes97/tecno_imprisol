@@ -86,7 +86,7 @@
                 <span>CU2 Gestionar Productos</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
+            <a class="nav-link collapsed" href="{{route('sales.index')}}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU3 Gestionar Ventas</span></a>
         </li>
 

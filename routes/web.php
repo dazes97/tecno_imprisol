@@ -31,6 +31,7 @@ Route::middleware(['administrative'])->group(function () {
     Route::resource('providers', 'ProvidersController');
     //CASO DE USO 2 GESTIONAR PRODUCTOS
     Route::resource('products', 'ProductsController');
+    Route::resource('sales', 'SalesController');
 
     //REPORTES
     Route::get('reports/products', ['as' => 'report.product', 'uses' => 'ProductsController@reportAllProducts']);
