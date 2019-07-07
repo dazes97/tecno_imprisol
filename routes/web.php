@@ -19,16 +19,24 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
-//CASO DE USO 1 GESTIONAR USUARIO
 Route::middleware(['root'])->group(function () {
+    //CASO DE USO 1 GESTIONAR USUARIO
     Route::resource('administratives', 'AdministrativesController');
 });
 
+
+Route::middleware(['administrative'])->group(function () {
+    //CASO DE USO 1 GESTIONAR USUARIO
+    Route::resource('clients', 'ClientsController');
+    Route::resource('providers', 'ProvidersController');
+    //CASO DE USO 2 GESTIONAR PRODUCTOS
+    Route::resource('products', 'ProductsController');
+});
+
+
+//PERSONALIZACION COLORES
 Route::post('color','UsersController@color')->name('color');
 
-Route::resource('clients', 'ClientsController');
-Route::resource('providers', 'ProvidersController');
 
 
 

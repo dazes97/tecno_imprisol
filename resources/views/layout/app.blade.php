@@ -42,7 +42,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="{{route('home')}}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -64,8 +64,10 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    @if(Auth::user()->isRoot() or Auth::user()->isAdministrative())
                     <a class="collapse-item" href="{{route('clients.index')}}">Gestionar Cliente</a>
                     <a class="collapse-item" href="{{route('providers.index')}}">Gestionar Proveedor</a>
+                    @endif
                     @if(Auth::user()->isRoot())
                         <a class="collapse-item" href="{{route('administratives.index')}}">Gestionar Administrativo</a>
                     @endif
@@ -73,8 +75,8 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
-                <span>CU2 Gestionar Producto</span></a>
+            <a class="nav-link collapsed" href="{{route('products.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU2 Gestionar Productos</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
