@@ -64,11 +64,13 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
+            @if(Auth::user()->isRoot() or Auth::user()->isAdministrative())
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>CU1 Gestionar Usuario</span>
             </a>
+            @endif
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     @if(Auth::user()->isRoot() or Auth::user()->isAdministrative())
@@ -81,19 +83,30 @@
                 </div>
             </div>
         </li>
+        @if(Auth::user()->isAdministrative())
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{route('products.index')}}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU2 Gestionar Productos</span></a>
         </li>
+        @endif
+        @if(Auth::user()->isClient())
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('orders.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU3 Gestionar Pedidos</span></a>
+        </li>
+        @endif
+
+        
+        @if(Auth::user()->isAdministrative())
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{route('sales.index')}}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU3 Gestionar Ventas</span></a>
         </li>
-
         <li class="nav-item">
             <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
                 <span>CU4 Gestionar Inventarios</span></a>
         </li>
+        @endif
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('statistics.index') }}"><i class="fas fa-fw fa-cog"></i>

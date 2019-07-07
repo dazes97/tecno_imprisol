@@ -12,4 +12,8 @@ class Order_Detail extends Model
     protected $fillable = [
         'id', 'description', 'quantity', 'subtotal'];
 
+    public function order()
+    {
+        return $this->belongsTo('App\Order');
+    }
 }

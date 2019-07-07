@@ -40,6 +40,11 @@ Route::middleware(['administrative'])->group(function () {
     Route::get('statistics', ['as' => 'statistics.index', 'uses' => 'StatisticsController@index']);
 });
 
+Route::middleware(['client'])->group(function () {
+    //CASO DE USO 3 GESTIONAR ORDENES
+    Route::resource('orders', 'OrdersController');
+});
+
 
 //PERSONALIZACION COLORES
 Route::post('color','UsersController@color')->name('color');

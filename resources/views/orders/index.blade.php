@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{route('products.create')}}">
-            <button type="button" class="btn btn-primary">Registrar Pedido</button>
+        <a href="{{route('orders.create')}}">
+            <button type="button" class="btn btn-primary">Registrar Orden</button>
         </a>
         <br>
         <table class="table">
@@ -11,27 +11,23 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Codigo</th>
-                <th scope="col">Marca</th>
-                <th scope="col">Modelo</th>
-                <th scope="col">Precio de Compra</th>
-                <th scope="col">Precio de Venta</th>
-                <th scope="col">Categoria</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Monto Total</th>
                 <th scope="col">Opciones</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($products as $product)
+            @foreach($orders as $order)
             <tr>
-                <th>{{$product->id}}</th>
-                <th>{{$product->code}}</th>
-                <th>{{$product->brand}}</th>
-                <th>{{$product->model}}</th>
-                <th>{{$product->purchase_price}}</th>
-                <th>{{$product->sale_cost}}</th>
-                <th>{{$product->category->description}}</th>
+                <th>{{$order->id}}</th>
+                <th>{{$order->code}}</th>
+                <th>{{$order->date}}</th>
+                <th>{{$order->description}}</th>
+                <th>{{$order->total_amount}}</th>
                 <td>
-                    <a href="{{route('products.edit',$product->id)}}"><button type="button" class="btn btn-warning">editar</button></a>
-                    <form action="{{route('products.destroy',$product->id)}}" method="post">
+                    <!--<a href="{{route('orders.edit',$order->id)}}"><button type="button" class="btn btn-warning">editar</button></a>-->
+                    <form action="{{route('orders.destroy',$order->id)}}" method="post">
                         @csrf
                         @method('delete')
                         <input type="submit" class="btn btn-danger" value="eliminar">
