@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use PDF;
+use Auth;
 
 class ProductsController extends Controller
 {
@@ -98,5 +101,26 @@ class ProductsController extends Controller
         $product = Product::find($id);
         $product->delete();
         return redirect()->route('products.index');
+    }
+
+    public function reportAllProducts() {
+
+        $products = Product::all();
+        $fecha = new Carbon('America/La_paz');
+        $date = $fecha->format('d-m-Y');
+        $pdf = PDF::loadView('products.productsReport', 
+            ['products' => $products, 'fecha' => $date]
+        );
+        $pdf->setPaper('A4', 'landscape');
+        $pdf->output();        
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(750, 570, "Pag. {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+       // $canvas->page_text(50, 570, "Usuario", Auth()->name(), 10, array(0, 0, 0));
+                
+        return $pdf->stream('products.productsReport');
+        
+        //return $pdf->download('products.productsReporte');
+       
     }
 }
