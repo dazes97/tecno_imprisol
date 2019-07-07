@@ -15,16 +15,16 @@ class ProductsTableSeeder extends Seeder
             'code' => "1121",
             'brand' => "Epson",
             'model' => "456px",
-            'purchase_price' => "45,20",
-            'sale_cost' => "50",
+            'purchase_price' => 45.20,
+            'sale_cost' => 50,
             'category_id' => 1,
         ]);
         DB::table('products')->insert([
             'code' => "1231",
             'brand' => "Epson",
             'model' => "Cartucho de tinta",
-            'purchase_price' => "20",
-            'sale_cost' => "25",
+            'purchase_price' => 20.3,
+            'sale_cost' => 25.5,
             'category_id' => 2,
         ]);
     }

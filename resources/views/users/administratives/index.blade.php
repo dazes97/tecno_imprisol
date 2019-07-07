@@ -6,23 +6,28 @@
             <button type="button" class="btn btn-primary">Registrar Administrativo</button>
         </a>
         <br>
-        <table class="table">
+        <script type="javascript">
+            $(document).ready(function() {
+                $('#example1').DataTable();
+            } );
+        </script>
+        <table id="example1" class="table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre Completo</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Fecha de Ingreso</th>
-                <th scope="col">Opciones</th>
+                <th class="th-sm">Id</th>
+                <th class="th-sm">Nombre Completo</th>
+                <th class="th-sm">Telefono</th>
+                <th class="th-sm">Fecha de Ingreso</th>
+                <th class="th-sm">Opciones</th>
             </tr>
             </thead>
             <tbody>
             @foreach($administratives as $administrative)
             <tr>
-                <th>{{$administrative->id}}</th>
-                <th>{{$administrative->name}}</th>
-                <th>{{$administrative->phone}}</th>
-                <th>{{$administrative->date_admission}}</th>
+                <td>{{$administrative->id}}</td>
+                <td>{{$administrative->name}}</td>
+                <td>{{$administrative->phone}}</td>
+                <td>{{$administrative->date_admission}}</td>
                 <td>
                     <a href="{{route('administratives.edit',$administrative->id)}}"><button type="button" class="btn btn-warning">editar</button></a>
                     <form action="{{route('administratives.destroy',$administrative->id)}}" method="post">
