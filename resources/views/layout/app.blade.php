@@ -64,10 +64,10 @@
             </a>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="">Gestionar Cliente</a>
-                    <a class="collapse-item" href="">Gestionar Proveedor</a>
+                    <a class="collapse-item" href="{{route('clients.index')}}">Gestionar Cliente</a>
+                    <a class="collapse-item" href="{{route('providers.index')}}">Gestionar Proveedor</a>
                     @if(Auth::user()->isRoot())
-                    <a class="collapse-item" href="">Gestionar Administrativo</a>
+                    <a class="collapse-item" href="{{route('administratives.index')}}">Gestionar Administrativo</a>
                     @endif
                 </div>
             </div>
@@ -439,6 +439,8 @@
 <!-- Page level custom scripts -->
 <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
 <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
+
+
 
 </body>
 

@@ -21,12 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 //CASO DE USO 1 GESTIONAR USUARIO
-Route::middleware(['root'])->group(function () {
-    Route::resource('administratives', 'AdministrativesController');
-});
-
-
 Route::resource('clients', 'ClientsController');
+Route::resource('administratives', 'AdministrativesController');
 Route::resource('providers', 'ProvidersController');
 
 

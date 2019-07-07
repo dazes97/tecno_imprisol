@@ -49,6 +49,29 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isAdministrative()
+    {
+        if (DB::table('administratives')->where('id', $this->id)->exists()) {
+            return true;
+        }
+        return false;
+    }
+    public function isClient()
+    {
+        if (DB::table('clients')->where('id', $this->id)->exists()) {
+            return true;
+        }
+        return false;
+    }
+    public function isProvider()
+    {
+        if (DB::table('providers')->where('id', $this->id)->exists()) {
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 }

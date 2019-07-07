@@ -14,7 +14,7 @@ class CreateAdministrativesTable extends Migration
     public function up()
     {
         Schema::create('administratives', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer('id')->unsigned();
             $table->string('name');
             $table->string('phone');
             $table->date('date_admission');
