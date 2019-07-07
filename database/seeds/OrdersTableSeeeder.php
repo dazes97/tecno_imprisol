@@ -16,12 +16,14 @@ class OrdersTableSeeeder extends Seeder
             'date' => '2019-07-20',
             'description' => 'mi primera orden',
             'total_amount' => 500.45,
+            'client_id' => 2
         ]);
         DB::table('orders')->insert([
             'code' => "456465assss",
             'date' => '2019-07-10',
             'description' => 'mi segunda orden',
             'total_amount' => 1525.45,
+            'client_id' => 2
         ]);
     }
 }
