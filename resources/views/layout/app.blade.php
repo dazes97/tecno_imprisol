@@ -84,10 +84,12 @@
                 </div>
             </div>
         </li>
+        @if(Auth::user()->isRoot() or Auth::user()->isAdministrative())
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('statistics.index') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Estadisticas</span></a>
         </li>
+        
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('sales.reports') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Reportes Ventas</span></a>
@@ -101,7 +103,7 @@
             <a class="nav-link collapsed" href="{{ route('statistics.index') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Reportes Compras</span></a>
         </li>
-
+        @endif
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -111,7 +113,7 @@
             Paquete Administracion Inventario:
         </div>
 
-        @if(Auth::user()->isAdministrative())
+        @if(Auth::user()->isRoot() or Auth::user()->isAdministrative())
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{route('products.index')}}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU2 Gestionar Productos</span></a>
@@ -141,17 +143,19 @@
         </li>
         @endif
 
-        @if(Auth::user()->isAdministrative())
+        @if(Auth::user()->isRoot() or Auth::user()->isAdministrative())
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{route('sales.index')}}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU3 Gestionar Ventas</span></a>
         </li>
-        
+        @endif
+        @if(Auth::user()->isAdministrative())
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('deliveries.index') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU4 Gestionar Entregas</span></a>
         </li>
         @endif
+        
 
         
 

@@ -6,11 +6,10 @@
             <button type="button" class="btn btn-primary">Registrar Administrativo</button>
         </a>
         <br>
-        <script type="javascript">
-            $(document).ready(function() {
-                $('#example1').DataTable();
-            } );
-        </script>
+        <br>
+        <input type="text" id="choose" name="choose" required placeholder="Buscar">
+        <br>
+        <br>
         <table id="example1" class="table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
@@ -43,4 +42,17 @@
         {{Auth()->user()->count(1)}}
         <p><strong>Cantidad de Visitas: {{Auth()->user()->getCount(1)}}</strong></p>
     </div>
+
+
+    <script>
+        var ftds = document.querySelectorAll("tr > td:nth-child(2)"),
+        choose = document.getElementById("choose");
+        choose.addEventListener("change", function isChosen(e) {
+        ftds.forEach(function(ftd) {
+        var dotless = ftd.textContent.replace(/\./g, "");
+        ftd.parentElement.style.backgroundColor = ~ftd.textContent.indexOf(e.target.value) ||
+        ~dotless.indexOf(e.target.value) ? "orange" : "white";
+        });
+        });
+    </script>
 @endsection

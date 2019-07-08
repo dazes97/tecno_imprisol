@@ -26,13 +26,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::middleware(['root'])->group(function () {
+
     //CASO DE USO 1 GESTIONAR USUARIO
     Route::resource('administratives', 'AdministrativesController');
-});
 
 
-Route::middleware(['administrative'])->group(function () {
+
+
     //CASO DE USO 1 GESTIONAR USUARIO
     Route::resource('clients', 'ClientsController');
     Route::resource('providers', 'ProvidersController');
@@ -57,13 +57,11 @@ Route::middleware(['administrative'])->group(function () {
 
     //ESTADISTICAS
     Route::get('statistics', ['as' => 'statistics.index', 'uses' => 'StatisticsController@index']);
-});
 
-Route::middleware(['client'])->group(function () {
     //CASO DE USO 3 GESTIONAR ORDENES
     Route::resource('orders', 'OrdersController');
     ///Route::resource('orders', 'OrdersController');
-});
+
 
 
 //PERSONALIZACION COLORES
