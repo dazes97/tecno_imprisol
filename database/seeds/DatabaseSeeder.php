@@ -19,6 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call(OrdersTableSeeder::class);
         $this->call(Order__DetailTableSeeeder::class);
         $this->call(SalesTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(Case__UsesTableSeeder::class);
+        $this->call(PrivilegesTableSeeder::class);
         //factory(User::class, 2)->create();
 
     }

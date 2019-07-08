@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'email', 'password', 'color','font_size','root'
+         'email', 'password', 'color','font_size','root','role_id'
     ];
 
     /**
@@ -86,6 +86,11 @@ class User extends Authenticatable
             return false;
         }
         return true;
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'privileges', 'case_use_id', 'role_id');
     }
 
 

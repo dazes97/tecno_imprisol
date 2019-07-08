@@ -19,6 +19,7 @@ class ProductsTableSeeder extends Seeder
             'purchase_price' => 45.20,
             'sale_cost' => 50,
             'category_id' => 1,
+            'warehouse_id' => 1
         ]);
         DB::table('products')->insert([
             'code' => "1231",
@@ -28,6 +29,7 @@ class ProductsTableSeeder extends Seeder
             'purchase_price' => 20.3,
             'sale_cost' => 25.5,
             'category_id' => 2,
+            'warehouse_id' => 1
         ]);
     }
 }
