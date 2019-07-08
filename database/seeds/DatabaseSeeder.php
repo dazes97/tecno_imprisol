@@ -25,6 +25,6 @@ class DatabaseSeeder extends Seeder
         //$this->call(Case__UsesTableSeeder::class);
         //$this->call(PrivilegesTableSeeder::class);
         //factory(User::class, 2)->create();
-        $this->call(Count_PagestableSeeder::class);
+        //$this->call(Count_PagetableSeeder::class);
     }
 }

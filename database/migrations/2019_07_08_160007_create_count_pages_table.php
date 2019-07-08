@@ -16,6 +16,7 @@ class CreateCountPagesTable extends Migration
         Schema::create('count_pages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('case_use');
+            $table->string('color');
             $table->integer('count')->default(0);
             $table->timestamps();
             $table->softDeletes();

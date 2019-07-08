@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class Count_PagestableSeeder extends Seeder
+class Count_PagetableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
