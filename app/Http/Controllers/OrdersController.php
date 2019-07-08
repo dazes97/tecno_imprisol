@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Carbon\Traits\Date;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class OrdersController extends Controller
 {
@@ -123,5 +124,37 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $order->delete();
         return redirect()->route('orders.index');
+    }
+
+    public function indexReport() {
+        return view('orders.indexreports');
+    }
+
+    public function generarReporte(Request $request) {
+
+        $fecha_ini = $request->date_inicio;
+        $fecha_fin = $request->date_fin;
+        $orders = Order::leftJoin('clients as c', 'c.id', '=', 'orders.client_id')
+                            ->leftJoin('sales as s', 's.order_id', '=', 'orders.id')
+                            ->where('orders.created_at', '>=', $fecha_ini)
+                            ->where('orders.created_at', '<=', $fecha_fin)
+                            ->select('orders.*', 'c.name', 's.code')
+                            ->get();
+        $fecha = new Carbon('America/La_paz');
+        $date = $fecha->format('d-m-Y');
+        $pdf = PDF::loadView('orders.reportsall', 
+            ['orders' => $orders, 'fecha' => $date]
+        );
+        $pdf->setPaper('A4', 'landscape');
+        $pdf->output();        
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(750, 570, "Pag. {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+       // $canvas->page_text(50, 570, "Usuario", Auth()->name(), 10, array(0, 0, 0));
+                
+        return $pdf->stream('orders.reportsall');
+        
+        //return $pdf->download('products.productsReporte');
+       
     }
 }

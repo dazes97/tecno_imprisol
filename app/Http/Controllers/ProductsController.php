@@ -131,14 +131,14 @@ class ProductsController extends Controller
         return view('products.indexreports');
     }
 
-    public function reportAllProducts(Request $request) {
+    public function generarReporte(Request $request) {
 
-        $fecha_ini = $request->fecha_inicio;
-        $fecha_fin = $request->fecha_fin;
-        $products = Product::leftJoin('warehouses as wh', 'ws.id', '=', 'products.warehouse_id')
+        $fecha_ini = $request->date_inicio;
+        $fecha_fin = $request->date_fin;
+        $products = Product::leftJoin('warehouses as wh', 'wh.id', '=', 'products.warehouse_id')
                             ->leftJoin('categories as c', 'c.id', '=', 'products.category_id')
-                            ->where('created_at', '>', $fecha_ini)
-                            ->where('created_at', '<', $fecha_fin)
+                            ->where('products.created_at', '>', $fecha_ini)
+                            ->where('products.created_at', '<', $fecha_fin)
                             ->select('products.*', 'c.description as category', 'wh.nombre')
                             ->get();
         $fecha = new Carbon('America/La_paz');
@@ -159,28 +159,5 @@ class ProductsController extends Controller
        
     }
 
-    public function generarReporte(Request $request) {
-
-        $fecha_inicio = $request->date_inicio;
-        $fecha_fin = $request->date_fin;
-        $sales = Sale::leftJoin('orders as o', 'o.id', '=', 'sales.order_id')
-                        ->leftJoin('clients as c', 'c.id', '=', 'o.client_id')
-                        ->where('sales.created_at', '>', $fecha_inicio)
-                        ->where('sales.created_at', '<', $fecha_fin)
-                        ->select('sales.*', 'c.name', 'o.code as codeped')
-                        ->get();
-        $fecha = new Carbon('America/La_paz');
-        $date = $fecha->format('d-m-Y');
-        $pdf = PDF::loadView('sales.reportsAll', 
-            ['sales' => $sales, 'fecha' => $date]
-        );
-        $pdf->setPaper('A4', 'landscape');
-        $pdf->output();        
-        $dom_pdf = $pdf->getDomPDF();
-        $canvas = $dom_pdf ->get_canvas();
-        $canvas->page_text(750, 570, "Pag. {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
-       // $canvas->page_text(50, 570, "Usuario", Auth()->name(), 10, array(0, 0, 0));
-                
-        return $pdf->stream('sales.reportsAll');
-    }
+    
 }
