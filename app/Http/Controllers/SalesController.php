@@ -130,7 +130,7 @@ class SalesController extends Controller
     }
 
     public function generarReporte(Request $request) {
-
+        dd($request->all());
         $fecha_inicio = $request->date_inicio;
         $fecha_fin = $request->date_fin;
         $sales = Sale::leftJoin('orders as o', 'o.id', '=', 'sales.order_id')

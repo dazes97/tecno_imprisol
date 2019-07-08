@@ -47,13 +47,20 @@ Route::get('/home', 'HomeController@index')->name('home');
     //GESTIONAR COMPRAS
     Route::resource('purchases', 'PurchasesController');
     //REPORTES
-    Route::get('reports/products', ['as' => 'report.product', 'uses' => 'ProductsController@reportAllProducts']);
+    //Route::get('reports/products', ['as' => 'report.product', 'uses' => 'ProductsController@reportAllProducts']);
 
     //Route::resource('reports', 'ReportsController');
     Route::get('reports/sales', ['as' => 'sales.reports', 'uses' => 'SalesController@indexReport']);
     Route::post('reports/sales', ['as' => 'sales.generarrep', 'uses' => 'SalesController@generarReporte']);
 
-    Route::post('reports/products', ['as' => 'products.reports', 'uses' => 'ProductsController@indexReport']);
+    Route::get('reports/products', ['as' => 'products.reports', 'uses' => 'ProductsController@indexReport']);
+    Route::post('reports/products', ['as' => 'products.generarrep', 'uses' => 'ProductsController@generarReporte']);
+
+    Route::get('reports/orders', ['as' => 'orders.reports', 'uses' => 'OrdersController@indexReport']);
+    Route::post('reports/orders', ['as' => 'orders.generarrep', 'uses' => 'OrdersController@generarReporte']);
+
+    Route::get('reports/purchases', ['as' => 'purchases.reports', 'uses' => 'PurchasesController@indexReport']);
+    Route::post('reports/purchases', ['as' => 'purchases.generarrep', 'uses' => 'PurchasesController@generarReporte']);
 
     //ESTADISTICAS
     Route::get('statistics', ['as' => 'statistics.index', 'uses' => 'StatisticsController@index']);

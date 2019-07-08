@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use App\Purchase;
 use App\Product;
 use App\Provider;
 use App\PurchaseDetail;
+use PDF;
 
 class PurchasesController extends Controller
 {
@@ -127,5 +129,39 @@ class PurchasesController extends Controller
         }
 
         return redirect()->route('purchases.index');
+    }
+
+    public function indexReport() {
+        return view('purchases.indexreports');
+    }
+
+    public function generarReporte(Request $request) {
+
+        $fecha_ini = $request->date_inicio;
+        $fecha_fin = $request->date_fin;
+        $purchases = Purchase::leftJoin('providers as p', 'p.id', '=', 'purchases.provider_id')
+                            ->where('purchases.created_at', '>=', $fecha_ini)
+                            ->where('purchases.created_at', '<=', $fecha_fin)
+                            ->select(
+                                'purchases.*', 'p.name', 'p.code as codep'
+                                )
+                            ->orderBy('purchases.id')
+                            ->get();
+        $fecha = new Carbon('America/La_paz');
+        $date = $fecha->format('d-m-Y');
+        $pdf = PDF::loadView('purchases.reportsall', 
+            ['purchases' => $purchases, 'fecha' => $date]
+        );
+        $pdf->setPaper('A4', 'landscape');
+        $pdf->output();        
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(750, 570, "Pag. {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+       // $canvas->page_text(50, 570, "Usuario", Auth()->name(), 10, array(0, 0, 0));
+                
+        return $pdf->stream('purchases.reportsall');
+        
+        //return $pdf->download('products.productsReporte');
+       
     }
 }

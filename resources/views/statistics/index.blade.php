@@ -6,41 +6,27 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('css/statistics/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/statistics/AdminLTE.min.css') }}">
+      <!-- Morris charts -->
+    <link rel="stylesheet" href="{{ asset('css/statistics/morris.css') }}">
     <div class="container-fluid">
         <h1>ESTADISTICAS</h1>
        <!-- Donut chart -->
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <i class="fa fa-bar-chart-o"></i>
-                <h3 class="box-title">Donut Chart</h3>
-                <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                </div>
-            </div>
-            <div class="box-body">
-                <div id="donut-chart" style="height: 300px;"></div>
-            </div>
-            <!-- /.box-body-->
-        </div>
     </div>
 
-   <!-- Bar chart -->
-    <div class="box box-primary">
+    <div class="box box-danger">
         <div class="box-header with-border">
-            <i class="fa fa-bar-chart-o"></i>
-            <h3 class="box-title">Bar Chart</h3>
+            <h3 class="box-title">Visitas por cada caso de</h3>
+
             <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
         </div>
-        <div class="box-body">
-            <div id="bar-chart" style="height: 300px;"></div>
+        <div class="box-body chart-responsive">
+            <div class="chart" id="sales-chart" style="height: 300px; position: relative;"></div>
         </div>
-        <!-- /.box-body-->
+    <!-- /.box-body -->
     </div>
     {{Auth()->user()->count(8)}}
         <p><strong>Cantidad de Visitas: {{Auth()->user()->getCount(8)}}</strong></p>
@@ -58,32 +44,67 @@
 <script src="{{asset('js/statistics/Flot/jquery.flot.pie.js')}}"></script>
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="{{asset('js/statistics/Flot/jquery.flot.categories.js')}}"></script>
+<script src="{{asset('js/statistics/morris.js/morris.min.js')}}"></script>
+<script src="{{asset('js/statistics/raphael/raphael.min.js')}}"></script>
 
 <script>
-    var donutData = [
-        { label: 'Series2', data: 10, color: '#3c8dbc' },
-        { label: 'Series3', data: 20, color: '#0073b7' },
-        { label: 'Series4', data: 50, color: '#00c0ef' }
-    ]
-    $.plot('#donut-chart', donutData, {
-        series: {
-        pie: {
-            show       : true,
-            radius     : 1,
-            innerRadius: 0.5,
-            label      : {
-            show     : true,
-            radius   : 2 / 3,
-            formatter: labelFormatter,
-            threshold: 0.1
-            }
 
-        }
+
+//***************************************************** */
+
+    function getEstadisticas() {
+        $.ajax({
+        // la URL para la petición
+        url : '/api/pagecount',
+
+        // especifica si será una petición POST o GET
+        type : 'GET',
+
+        // el tipo de información que se espera de respuesta
+        dataType : 'json',
+
+        // código a ejecutar si la petición es satisfactoria;
+        // la respuesta es pasada como argumento a la función
+        success : function(resp) {
+            console.log('data ==> '+ resp);
+            if (resp.response == 1) {
+                let array = [];
+                let colors = [];
+                let data = resp.data;
+                for (let i = 0; i < data.length; i++) {
+                    colors.push(data[i].color);
+                    array.push({
+                        label: data[i].case_use,
+                        value: data[i].count
+                    });
+                }
+                //cargar(array);
+                var donut = new Morris.Donut({
+                element: 'sales-chart',
+                resize: true,
+                colors: colors,
+                data: array,
+                hideHover: 'auto'
+                });
+            }
         },
-        legend: {
-        show: false
+
+        // código a ejecutar si la petición falla;
+        // son pasados como argumentos a la función
+        // el objeto de la petición en crudo y código de estatus de la petición
+        error : function(xhr, status) {
+            //alert('Disculpe, existió un problema');
+        },
+
+        // código a ejecutar sin importar si la petición falló o no
+        complete : function(xhr, status) {
+            //alert('Petición realizada');
         }
-    })
+    });
+    }
+    
+    
+    getEstadisticas();
 
     /*
    * Custom Label formatter

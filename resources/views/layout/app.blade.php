@@ -98,9 +98,13 @@
             <a class="nav-link collapsed" href="{{ route('products.reports') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Reportes Productos</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('orders.reports') }}"><i class="fas fa-fw fa-cog"></i>
+                <span>Reportes Pedidos</span></a>
+        </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('statistics.index') }}"><i class="fas fa-fw fa-cog"></i>
+            <a class="nav-link collapsed" href="{{ route('purchases.reports') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Reportes Compras</span></a>
         </li>
         @endif

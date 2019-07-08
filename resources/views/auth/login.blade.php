@@ -41,15 +41,15 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Bienvenido de Vuelta!</h1>
                                 </div>
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{ route('login') }}" onsubmit="return validar(this)" >
                                     @csrf
 
                                     <div class="form-group row">
                                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                                            <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+                                            <label id="lblemail" style="display:none;color:red;">Email invalido</label>
                                             @error('email')
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -62,8 +62,8 @@
                                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+                                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password">
+                                            <label id="lblpass" style="display:none;color:red;">Contraseña invalida min 8 caracteres max 16</label>
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -101,6 +101,35 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+
+<script>
+            
+            function validar(e) {
+                expresionEmail = /\w+@\w+\.+[a-z]/;  
+                //expresionTelefono = /\/;  
+                
+                var email = document.getElementById('email');
+                var lblemail = document.getElementById('lblemail');
+                    lblemail.setAttribute("style", "display: none;");
+
+                var password = document.getElementById('password');
+                var lblpass = document.getElementById('lblpass');
+                    lblpass.setAttribute("style", "display: none;");
+               
+                var bool = true;
+                
+                if (!expresionEmail.test(email.value) || email.value.length === 0) {
+                    lblemail.setAttribute("style", "display: initial;color:red;");
+                    bool = false;
+                }
+                if (password.value.length < 8 || password.value.length > 16) {
+                    lblpass.setAttribute("style", "display: initial;color:red;");
+                    bool = false;
+                }
+                return bool;
+            }
+        
+    </script>
 
 </body>
 
