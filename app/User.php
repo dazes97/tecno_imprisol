@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'email', 'password', 'color','root'
+         'email', 'password', 'color','font_size','root'
     ];
 
     /**
@@ -76,6 +76,16 @@ class User extends Authenticatable
     {
         $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
+
+    public function isSelled($id)
+    {
+        $sale = Sale::where('order_id',$id);
+        if($sale == null)
+        {
+            return false;
+        }
+        return true;
     }
 
 

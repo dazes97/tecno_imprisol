@@ -20,8 +20,14 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-
+    <style>
+        html {
+            font-size: {{Auth()->user()->font_size}};
+        } 
+    </style>
+master
 </head>
+
 
 <body id="page-top">
 
@@ -474,6 +480,10 @@
                             <option value="warning">Amarillo</option>
                             <option value="dark">Negro</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Tamaño de Fuente</label>
+                        <input type="number" class="form-control" id="font_size" name="font_size">
                     </div>
                 </div>
                 <div class="modal-footer">
