@@ -104,9 +104,13 @@ class ProductsController extends Controller
         return redirect()->route('products.index');
     }
 
+    public function indexReport() {
+        return view('products.indexreports');
+    }
+
     public function reportAllProducts() {
 
-        $products = Product::all();
+        $products = Product::leftJoin('almacen as a', 'a.id', 'products._id');
         $fecha = new Carbon('America/La_paz');
         $date = $fecha->format('d-m-Y');
         $pdf = PDF::loadView('products.productsReport', 
@@ -123,5 +127,30 @@ class ProductsController extends Controller
         
         //return $pdf->download('products.productsReporte');
        
+    }
+
+    public function generarReporte(Request $request) {
+
+        $fecha_inicio = $request->date_inicio;
+        $fecha_fin = $request->date_fin;
+        $sales = Sale::leftJoin('orders as o', 'o.id', '=', 'sales.order_id')
+                        ->leftJoin('clients as c', 'c.id', '=', 'o.client_id')
+                        ->where('sales.created_at', '>', $fecha_inicio)
+                        ->where('sales.created_at', '<', $fecha_fin)
+                        ->select('sales.*', 'c.name', 'o.code as codeped')
+                        ->get();
+        $fecha = new Carbon('America/La_paz');
+        $date = $fecha->format('d-m-Y');
+        $pdf = PDF::loadView('sales.reportsAll', 
+            ['sales' => $sales, 'fecha' => $date]
+        );
+        $pdf->setPaper('A4', 'landscape');
+        $pdf->output();        
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(750, 570, "Pag. {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+       // $canvas->page_text(50, 570, "Usuario", Auth()->name(), 10, array(0, 0, 0));
+                
+        return $pdf->stream('sales.reportsAll');
     }
 }

@@ -13,19 +13,19 @@
                         <label id="lblname" style="display:none;color:red;">Nombre requirido</label>
                     </div>
                     <div class="form-group">
-                        <label id="lblemail" for="email">Email</label>
+                        <label id="lbl" for="email">Email</label>
                         <input type="text" class="form-control" id="email" name="email">
                         <label id="lblemail" style="display:none;color:red;">Email Invalido</label>
                     </div>
                     <div class="form-group">
-                        <label id="lblpass" for="nombre">Contraseña</label>
+                        <label id="lbl" for="nombre">Contraseña</label>
                         <input type="password" class="form-control" id="password" name="password">
                         <label id="lblpass" style="display:none;color:red;">Contraseña Invalida</label>
                     </div>
                     <div class="form-group">
-                        <label id="lblphone" for="telefono">Telefono</label>
+                        <label id="lbl" for="telefono">Telefono</label>
                         <input type="text" class="form-control" id="phone" name="phone">
-                        <label id="lblname" style="display:none;color:red;">Telefono invalido</label>
+                        <label id="lblphone" style="display:none;color:red;">Telefono invalido</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>
@@ -43,24 +43,32 @@
                 var lblname = document.getElementById('lblname');
                     lblname.setAttribute("style", "display: none;");
                 var email = document.getElementById('email');
+                var lblemail = document.getElementById('lblemail');
+                    lblemail.setAttribute("style", "display: none;");
                 var password = document.getElementById('password');
+                var lblpass = document.getElementById('lblpass');
+                    lblpass.setAttribute("style", "display: none;");
                 var phone = document.getElementById('phone');
+                var lblphone = document.getElementById('lblphone');
+                    lblphone.setAttribute("style", "display: none;");
                 var bool = true;
                 if (name.value.length == 0) {
                     lblname.setAttribute("style", "display: initial;color:red;");
                     //alert('Rellena el campo nomnbre');
                     bool = false;
                 }
-                /*
-                if (!expresionEmail.test(email)) {
-                    alert('correo incorecto');
-                    label.setAttribute("style", "display: initial;");
+                if (!expresionEmail.test(email.value) || email.value.length === 0) {
+                    lblemail.setAttribute("style", "display: initial;color:red;");
                     bool = false;
                 }
-                if (password.length < 8 && password.length > 16) {
-                    alert('Contasenia invalida');
+                if (password.value.length < 8 || password.value.length > 16) {
+                    lblpass.setAttribute("style", "display: initial;color:red;");
                     bool = false;
-                }*/
+                }
+                if (phone.value.length === 0) {
+                    lblphone.setAttribute("style", "display: initial;color:red;");
+                    bool = false;
+                }
                 return bool;
             }
         

@@ -122,6 +122,16 @@ master
                 <span>Estadisticas</span></a>
         </li>
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('sales.reports') }}"><i class="fas fa-fw fa-cog"></i>
+                <span>Reportes Ventas</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('statistics.index') }}"><i class="fas fa-fw fa-cog"></i>
+                <span>Reportes Compras</span></a>
+        </li>
+
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"

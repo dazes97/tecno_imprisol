@@ -23,9 +23,11 @@ class CreateProductsTable extends Migration
             $table->double('purchase_price');
             $table->double('sale_cost');
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('warehouse_id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('warehouse_id')->references('id')->on('warehouses');
         });
     }
 
