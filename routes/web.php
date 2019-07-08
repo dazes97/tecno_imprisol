@@ -53,6 +53,8 @@ Route::middleware(['administrative'])->group(function () {
     Route::get('reports/sales', ['as' => 'sales.reports', 'uses' => 'SalesController@indexReport']);
     Route::post('reports/sales', ['as' => 'sales.generarrep', 'uses' => 'SalesController@generarReporte']);
 
+    Route::post('reports/products', ['as' => 'products.reports', 'uses' => 'ProductsController@indexReport']);
+
     //ESTADISTICAS
     Route::get('statistics', ['as' => 'statistics.index', 'uses' => 'StatisticsController@index']);
 });
