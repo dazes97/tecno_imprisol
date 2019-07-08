@@ -14,6 +14,7 @@
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Codigo</th>
+                <th scope="col">Nombre</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Modelo</th>
                 <th scope="col">Precio de Compra</th>
@@ -27,6 +28,7 @@
             <tr>
                 <th>{{$product->id}}</th>
                 <th>{{$product->code}}</th>
+                <th>{{$product->name}}</th>
                 <th>{{$product->brand}}</th>
                 <th>{{$product->model}}</th>
                 <th>{{$product->purchase_price}}</th>

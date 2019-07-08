@@ -12,11 +12,15 @@
                         <input type="number" class="form-control" id="code" name="code">
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Marca</label>
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" >
+                    </div>
+                    <div class="form-group">
+                        <label for="brand">Marca</label>
                         <input type="text" class="form-control" id="brand" name="brand" >
                     </div>
                     <div class="form-group">
-                        <label for="nombre">Modelo</label>
+                        <label for="model">Modelo</label>
                         <input type="text" class="form-control" id="model" name="model" >
                     </div>
                     <div class="form-group">

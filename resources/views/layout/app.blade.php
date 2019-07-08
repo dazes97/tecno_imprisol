@@ -89,6 +89,10 @@ master
             <a class="nav-link collapsed" href="{{route('products.index')}}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU2 Gestionar Productos</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('purchases.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU2.1 Gestionar Compras</span></a>
+        </li>
         @endif
         @if(Auth::user()->isClient())
         <li class="nav-item">
@@ -104,7 +108,7 @@ master
                 <span>CU3 Gestionar Ventas</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href=""><i class="fas fa-fw fa-cog"></i>
+            <a class="nav-link collapsed" href="{{route('inventories.index')}}"><i class="fas fa-fw fa-cog"></i>
                 <span>CU4 Gestionar Inventarios</span></a>
         </li>
         <li class="nav-item">

@@ -5,11 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class InventoryCut extends Model
+class PurchaseDetail extends Model
 {
     use SoftDeletes;
-
-    protected $fillable = [
-        'description', 'date', 'administrative_id'
-    ];
 }

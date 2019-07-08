@@ -13,6 +13,7 @@ class ProductsTableSeeder extends Seeder
     {
         DB::table('products')->insert([
             'code' => "1121",
+            'name' => "impresora",
             'brand' => "Epson",
             'model' => "456px",
             'purchase_price' => 45.20,
@@ -21,6 +22,7 @@ class ProductsTableSeeder extends Seeder
         ]);
         DB::table('products')->insert([
             'code' => "1231",
+            'name' => "tinta",
             'brand' => "Epson",
             'model' => "Cartucho de tinta",
             'purchase_price' => 20.3,

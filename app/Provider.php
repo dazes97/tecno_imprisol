@@ -9,5 +9,6 @@ class Provider extends Model
 {
     use SoftDeletes;
     protected $fillable = [
-        'code', 'name', 'phone','address'];
+        'code', 'name', 'phone','address'
+    ];
 }

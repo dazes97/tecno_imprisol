@@ -38,9 +38,14 @@ Route::middleware(['administrative'])->group(function () {
     Route::resource('providers', 'ProvidersController');
     //CASO DE USO 2 GESTIONAR PRODUCTOS
     Route::resource('products', 'ProductsController');
+    //GESTIONAR VENTAS
     Route::resource('sales', 'SalesController');
+    //GESTIONAR ENTREGAS
     Route::resource('deliveries', 'DeliveriesController');
-
+    //GESTIONAR INVENTARIO
+    Route::resource('inventories', 'InventoryCutController');
+    //GESTIONAR COMPRAS
+    Route::resource('purchases', 'PurchasesController');
     //REPORTES
     Route::get('reports/products', ['as' => 'report.product', 'uses' => 'ProductsController@reportAllProducts']);
 
@@ -51,6 +56,7 @@ Route::middleware(['administrative'])->group(function () {
 Route::middleware(['client'])->group(function () {
     //CASO DE USO 3 GESTIONAR ORDENES
     Route::resource('orders', 'OrdersController');
+    ///Route::resource('orders', 'OrdersController');
 });
 
 

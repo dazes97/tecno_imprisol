@@ -11,6 +11,10 @@
                 <input type="number" class="form-control" id="code" name="code" value="{{$product->code}}">
             </div>
             <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{$product->code}}">
+            </div>
+            <div class="form-group">
                 <label for="nombre">Marca</label>
                 <input type="text" class="form-control" id="brand" name="brand" value="{{$product->brand}}">
             </div>
