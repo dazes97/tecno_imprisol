@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSalesTable extends Migration
+class CreateInventoryCutsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('inventory_cuts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
-            $table->date('emission_date');
-            $table->decimal('total_amount');
-            $table->unsignedBigInteger('order_id');
-            $table->timestamps();
+            $table->date('date');
+            $table->string('description');
             $table->softDeletes();
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->unsignedBigInteger('administrative_id');
+            $table->timestamps();
+
+            $table->foreign('administrative_id')->references('id')->on('administratives');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('inventory_cuts');
     }
 }

@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->integer('code');
             $table->string('brand');
             $table->string('model');
+            $table->integer('stock')->nullable();
             $table->double('purchase_price');
             $table->double('sale_cost');
             $table->unsignedBigInteger('category_id');

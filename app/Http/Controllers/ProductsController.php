@@ -83,6 +83,7 @@ class ProductsController extends Controller
         $product->code = $request->get('code');
         $product->brand = $request->get('brand');
         $product->model = $request->get('model');
+        $product->stock = $request->get('stock');
         $product->purchase_price = $request->get('purchase_price');
         $product->sale_cost = $request->get('sale_cost');
         $product->category_id = $request->get('category_id');

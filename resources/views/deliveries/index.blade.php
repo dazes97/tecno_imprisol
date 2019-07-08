@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <a href="{{route('sales.create')}}">
-            <button type="button" class="btn btn-primary">Registrar Venta</button>
+        <a href="{{route('deliveries.create')}}">
+            <button type="button" class="btn btn-primary">Registrar Entrega</button>
         </a>
         <!--<a href="{{route('report.product')}}">
             <button type="button" class="btn btn-primary">Generar Reporte</button>
@@ -14,26 +14,34 @@
             <tr>
                 <th scope="col">Nro</th>
                 <th scope="col">Codigo</th>
-                <th scope="col">Fecha de Emision</th>
-                <th scope="col">Monto Total</th>
-                <th scope="col">Codigo Orden</th>
+                <th scope="col">Fecha de Registro</th>
+                <th scope="col">Fecha de Entrega</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Venta</th>
                 <!--<th scope="col">Cliente</th>-->
                 <th scope="col">Opciones</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($sales as $key => $row)
+            @foreach($deliveries as $key => $row)
             <tr>
                 <th>{{$key + 1}}</th>
                 <th>{{$row->code}}</th>
-                <th>{{$row->emission_date}}</th>
-                <th>{{$row->total_amount}}</th>
-                <th>{{$row->order_id}}</th>
+                <th>{{$row->register_date}}</th>
+                <th>{{$row->delivery_date}}</th>
+                <th>{{$row->destine}}</th>
+                <th>{{$row->estado}}</th>
+                <th>{{$row->sale_id}}</th>
                 <!--<th>{{$row->code_order}}</th>-->
                 <!--<th>{{$row->name}}</th>-->
                 <td>
-                    <a href="{{ route('sales.edit',$row->id) }}"><button type="button" class="btn btn-warning">editar</button></a>
-                    <form action="{{ route('sales.destroy',$row->id) }}" method="post">
+                    @if($row->estado == 'P')
+                    <a href="{{ route('deliveries.edit', $row->id) }}">
+                        <button type="button" class="btn btn-warning">editar</button>
+                    </a>
+                    @endif
+                    <form action="{{ route('deliveries.destroy', $row->id) }}" method="post">
                         @csrf
                         @method('delete')
                         <input type="submit" class="btn btn-danger" value="eliminar">

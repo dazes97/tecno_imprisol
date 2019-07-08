@@ -8,24 +8,28 @@
             @method('patch')
             <div class="form-group">
                 <label for="nombre">Codigo</label>
-                <input type="number" class="form-control" id="code" name="code" min="0" max="9999999" value="{{$product->code}}" required>
+                <input type="number" class="form-control" id="code" name="code" value="{{$product->code}}">
             </div>
             <div class="form-group">
                 <label for="nombre">Marca</label>
-                <input type="text" class="form-control" id="brand" name="brand" maxlength="25" value="{{$product->brand}}" required>
+                <input type="text" class="form-control" id="brand" name="brand" value="{{$product->brand}}">
             </div>
             <div class="form-group">
                 <label for="nombre">Modelo</label>
-                <input type="text" class="form-control" id="model" name="model" maxlength="25" value="{{$product->model}}" required>
+                <input type="text" class="form-control" id="model" name="model" value="{{$product->model}}">
             </div>
             <div class="form-group">
                 <label for="telefono">Precio de Compra</label>
-                <input type="number" class="form-control" id="purchase_price" name="purchase_price" min="0" max="99999999" value="{{$product->purchase_price}}" required>
+                <input type="number" class="form-control" id="purchase_price" name="purchase_price" value="{{$product->purchase_price}}">
             </div>
             <div class="form-group">
                 <label for="telefono">Precio de Venta</label>
-                <input type="number" class="form-control" id="sale_cost" name="sale_cost" min="0" max="99999999" value="{{$product->sale_cost}}" required>
+                <input type="number" class="form-control" id="sale_cost" name="sale_cost" value="{{$product->sale_cost}}">
             </div>
+            <div class="form-group">
+                        <label for="stock">Stock</label>
+                        <input type="number" class="form-control" id="stock" name="stock">
+                    </div>
             <div class="form-group">
                 <label for="telefono">Categoria del producto</label>
                 <select class="form-control" id="category_id" name="category_id">

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sale;
 use App\Order;
-use App\Delibery;
+use App\Delivery;
 class SalesController extends Controller
 {
     /**
@@ -30,9 +30,11 @@ class SalesController extends Controller
      */
     public function create()
     {
-        $orders = Order::leftJoin('sales as s', 's.order_id', '<>', 'orders.id')
+        /*$orders = Order::leftJoin('sales as s', 's.order_id', '<>', 'orders.id')
                         ->select('orders.*')
-                        ->get();
+                        ->get(); 
+        */
+        $orders = Order::all();               
         return view('sales.create', ['orders' => $orders]);
     }
 
@@ -44,7 +46,7 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::find($order_id);
+        $order = Order::find($request->order_id);
         $sale = new Sale();
         $sale->code = $request->code;
         $sale->emission_date = $request->date;
@@ -53,6 +55,12 @@ class SalesController extends Controller
         $sale->order_id = $request->order_id;
         $sale->save();
 
+        $delibery = new Delivery();
+        $delibery->code = $sale->code;
+        $delibery->register_date = $sale->emission_date;
+        $delibery->sale_id = $sale->id;
+        $delibery->estado = 'P';
+        $delibery->save();
         return redirect()->route('sales.index');
     }
 
@@ -109,6 +117,8 @@ class SalesController extends Controller
     {
         $sale = Sale::findOrFail($id);
         $sale->delete();
+        $delivery = Delivery::where('sale_id', $sale->id)->first();
+        $delivery->delete();
         return redirect()->route('sales.index');
     }
 }
