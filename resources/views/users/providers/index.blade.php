@@ -37,6 +37,7 @@
             @endforeach
             </tbody>
         </table>
-
+        {{Auth()->user()->count(1)}}
+        <p><strong>Cantidad de Visitas: {{Auth()->user()->getCount(1)}}</strong></p>
     </div>
 @endsection

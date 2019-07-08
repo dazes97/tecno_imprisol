@@ -11,6 +11,15 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('warehouses')->insert([
+            'codigo' => "cod001",
+            'nombre' => "almacen1",
+        ]);
+        DB::table('warehouses')->insert([
+            'codigo' => "cod002",
+            'nombre' => "almacen2",
+        ]);
+    
         DB::table('products')->insert([
             'code' => "1121",
             'name' => "impresora",

@@ -30,6 +30,8 @@
                 <button type="submit" class="btn btn-danger">Generar Reporte</button>
             </div>
         </form>
+        {{Auth()->user()->count(7)}}
+        <p><strong>Cantidad de Visitas: {{Auth()->user()->getCount(7)}}</strong></p>
     </div>
 
 @endsection

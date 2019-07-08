@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-         'email', 'password', 'color','font_size','root'
+         'email', 'password', 'color','font_size','root','role_id'
     ];
 
     /**
@@ -86,6 +86,25 @@ class User extends Authenticatable
             return false;
         }
         return true;
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'privileges', 'case_use_id', 'role_id');
+    }
+
+    public function count($id)
+    {
+        $countPage = CountPage::find($id);
+        $cantidad = (int)$countPage->count;
+        $cantidad = $cantidad +1;
+        $countPage->count = $cantidad;
+        $countPage->save();
+    }
+    public function getCount($id)
+    {
+        $countPage = CountPage::find($id);
+        return $countPage->count;
     }
 
 

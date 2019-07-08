@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('color')->default('primary');
             $table->string('font_size')->default('15px');
             $table->string('root')->default('0');
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
