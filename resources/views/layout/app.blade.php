@@ -25,7 +25,7 @@
             font-size: {{Auth()->user()->font_size}};
         } 
     </style>
-master
+
 </head>
 
 
@@ -60,7 +60,7 @@ master
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Paquete 1
+            Paquete Administracion:
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
@@ -84,44 +84,10 @@ master
                 </div>
             </div>
         </li>
-        @if(Auth::user()->isAdministrative())
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('products.index')}}"><i class="fas fa-fw fa-cog"></i>
-                <span>CU2 Gestionar Productos</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('purchases.index')}}"><i class="fas fa-fw fa-cog"></i>
-                <span>CU2.1 Gestionar Compras</span></a>
-        </li>
-        @endif
-        @if(Auth::user()->isClient())
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('orders.index')}}"><i class="fas fa-fw fa-cog"></i>
-                <span>CU3 Gestionar Pedidos</span></a>
-        </li>
-        @endif
-
-        
-        @if(Auth::user()->isAdministrative())
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('sales.index')}}"><i class="fas fa-fw fa-cog"></i>
-                <span>CU3 Gestionar Ventas</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('inventories.index')}}"><i class="fas fa-fw fa-cog"></i>
-                <span>CU4 Gestionar Inventarios</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('deliveries.index') }}"><i class="fas fa-fw fa-cog"></i>
-                <span>CU4 Gestionar Entregas</span></a>
-        </li>
-        @endif
-
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('statistics.index') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Estadisticas</span></a>
         </li>
-
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('sales.reports') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Reportes Ventas</span></a>
@@ -136,68 +102,60 @@ master
                 <span>Reportes Compras</span></a>
         </li>
 
-        <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-               aria-expanded="true" aria-controls="collapseUtilities">
-                <i class="fas fa-fw fa-wrench"></i>
-                <span>Utilities</span>
-            </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                 data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
-                </div>
-            </div>
-        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Addons
+            Paquete Administracion Inventario:
         </div>
 
-        <!-- Nav Item - Pages Collapse Menu -->
+        @if(Auth::user()->isAdministrative())
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-               aria-expanded="true" aria-controls="collapsePages">
-                <i class="fas fa-fw fa-folder"></i>
-                <span>Pages</span>
-            </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item" href="blank.html">Blank Page</a>
-                </div>
-            </div>
+            <a class="nav-link collapsed" href="{{route('products.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU2 Gestionar Productos</span></a>
         </li>
-
-        <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+            <a class="nav-link collapsed" href="{{route('inventories.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU4 Gestionar Inventarios</span></a>
         </li>
-
-        <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+            <a class="nav-link collapsed" href="{{route('purchases.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU2.1 Gestionar Compras</span></a>
         </li>
+        @endif
 
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Paquete Administracion Ventas y Pedido:
+        </div>
+
+        @if(Auth::user()->isClient())
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('orders.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU3 Gestionar Pedidos</span></a>
+        </li>
+        @endif
+
+        @if(Auth::user()->isAdministrative())
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('sales.index')}}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU3 Gestionar Ventas</span></a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('deliveries.index') }}"><i class="fas fa-fw fa-cog"></i>
+                <span>CU4 Gestionar Entregas</span></a>
+        </li>
+        @endif
+
+        
+
+        
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCaseUsesTable extends Migration
+class CreateCountPagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCaseUsesTable extends Migration
      */
     public function up()
     {
-        Schema::create('case__uses', function (Blueprint $table) {
+        Schema::create('count_pages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('url')->nullable();
-            $table->unsignedBigInteger('case__uses_id')->nullable();
+            $table->string('case_use');
+            $table->integer('count')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +29,6 @@ class CreateCaseUsesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('case__uses');
+        Schema::dropIfExists('count_pages');
     }
 }

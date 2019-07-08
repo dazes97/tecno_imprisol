@@ -42,6 +42,8 @@
         </div>
         <!-- /.box-body-->
     </div>
+    {{Auth()->user()->count(8)}}
+        <p><strong>Cantidad de Visitas: {{Auth()->user()->getCount(8)}}</strong></p>
     <!-- /.box -->
 
     <!-- jQuery 3 -->
