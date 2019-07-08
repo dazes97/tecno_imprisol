@@ -13,6 +13,10 @@ class UsersController extends Controller
     {
         $user = User::find(Auth::id());
         $user->color = $request->get('color');
+        if($request->get('font_size') != null)
+        {
+            $user->font_size = $request->get('font_size')."px";
+        }
         $user->save();
         return redirect('home');
     }

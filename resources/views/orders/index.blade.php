@@ -27,11 +27,16 @@
                 <th>{{$order->total_amount}}</th>
                 <td>
                     <!--<a href="{{route('orders.edit',$order->id)}}"><button type="button" class="btn btn-warning">editar</button></a>-->
-                    <form action="{{route('orders.destroy',$order->id)}}" method="post">
-                        @csrf
-                        @method('delete')
-                        <input type="submit" class="btn btn-danger" value="eliminar">
-                    </form>
+                     @if(Auth()->user()->isSelled($order->id))
+                            <button type="button" class="btn btn-success">Vendido</button>
+                        @else
+                            <form action="{{route('orders.destroy',$order->id)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <input type="submit" class="btn btn-danger" value="eliminar">
+                            </form>
+                     @endif
+
                 </td>
             </tr>
             @endforeach

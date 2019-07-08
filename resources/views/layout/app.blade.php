@@ -20,13 +20,13 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
-
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="{{ asset('css/statistics/bootstrap/dist/css/bootstrap.min.css') }}">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('css/statistics/font-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/statistics/AdminLTE.min.css') }}">
+    
 </head>
+<style>
+    html {
+        font-size: {{Auth()->user()->font_size}};
+    } 
+</style>
 
 <body id="page-top">
 
@@ -476,6 +476,10 @@
                             <option value="dark">Negro</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="nombre">Tamaño de Fuente</label>
+                        <input type="number" class="form-control" id="font_size" name="font_size">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
@@ -504,85 +508,7 @@
 <script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
 <script src="{{asset('js/demo/chart-pie-demo.js')}}"></script>
 <!--=================ESTADISTICAS=====================-->
-<!-- jQuery 3 -->
-<script src="{{asset('js/statistics/jquery/dist/jquery.min.js')}}"></script>
-<!-- FastClick -->
-<script src="{{asset('js/statistics/fastclick/lib/fastclick.js')}}"></script>
-<!-- FLOT CHARTS -->
-<script src="{{asset('js/statistics/Flot/jquery.flot.js')}}"></script>
-<!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
-<script src="{{asset('js/statistics/Flot/jquery.flot.resize.js')}}"></script>
-<!-- FLOT PIE PLUGIN - also used to draw donut charts -->
-<script src="{{asset('js/statistics/Flot/jquery.flot.pie.js')}}"></script>
-<!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
-<script src="{{asset('js/statistics/Flot/jquery.flot.categories.js')}}"></script>
 
-<script>
-    var donutData = [
-        { label: 'Series2', data: 10, color: '#3c8dbc' },
-        { label: 'Series3', data: 20, color: '#0073b7' },
-        { label: 'Series4', data: 50, color: '#00c0ef' }
-    ]
-    $.plot('#donut-chart', donutData, {
-        series: {
-        pie: {
-            show       : true,
-            radius     : 1,
-            innerRadius: 0.5,
-            label      : {
-            show     : true,
-            radius   : 2 / 3,
-            formatter: labelFormatter,
-            threshold: 0.1
-            }
-
-        }
-        },
-        legend: {
-        show: false
-        }
-    })
-
-    /*
-   * Custom Label formatter
-   * ----------------------
-   */
-    function labelFormatter(label, series) {
-        return '<div style="font-size:13px; text-align:center; padding:2px; color: #fff; font-weight: 600;">'
-        + label
-        + '<br>'
-        + Math.round(series.percent) + '%</div>'
-    }
-
-    /*
-     * BAR CHART
-     * ---------
-     */
-
-    var bar_data = {
-      data : [['January', 10], ['February', 8], ['March', 4], ['April', 13], ['May', 17], ['June', 9]],
-      color: '#3c8dbc'
-    }
-    $.plot('#bar-chart', [bar_data], {
-      grid  : {
-        borderWidth: 1,
-        borderColor: '#f3f3f3',
-        tickColor  : '#f3f3f3'
-      },
-      series: {
-        bars: {
-          show    : true,
-          barWidth: 0.5,
-          align   : 'center'
-        }
-      },
-      xaxis : {
-        mode      : 'categories',
-        tickLength: 0
-      }
-    })
-    /* END BAR CHART */
-</script>
 
 </body>
 
