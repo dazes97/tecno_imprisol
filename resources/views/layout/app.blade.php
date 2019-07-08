@@ -126,6 +126,10 @@ master
             <a class="nav-link collapsed" href="{{ route('sales.reports') }}"><i class="fas fa-fw fa-cog"></i>
                 <span>Reportes Ventas</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('products.reports') }}"><i class="fas fa-fw fa-cog"></i>
+                <span>Reportes Productos</span></a>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('statistics.index') }}"><i class="fas fa-fw fa-cog"></i>

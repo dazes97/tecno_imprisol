@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Product;
+use App\Warehouse;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use PDF;
@@ -30,7 +31,11 @@ class ProductsController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('products.create')->with('categories', $categories);
+        $warehouses = Warehouse::all();
+        return view('products.create', [
+            'warehouses' => $warehouses,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -42,7 +47,18 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        Product::create($request->all());
+        $product = new Product();
+        $product->code = $request->code;
+        $product->name = $request->name;
+        $product->brand = $request->brand;
+        $product->model = $request->model;
+        $product->stock = $request->stock;
+        $product->purchase_price = $request->purchase_price;
+        $product->sale_cost = $request->sale_cost;
+        $product->category_id = $request->category_id;
+        $product->warehouse_id = $request->warehouse_id;
+        $product->save();
+        //Product::create($request->all());
         return redirect()->route('products.index');
     }
 
@@ -66,8 +82,14 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        $warehouses = Warehouse::all();
         $categories = Category::where('id', '!=', $product->category->id)->get();
-        return view('products.edit')->with(['product' => $product, 'categories' => $categories]);
+        return view('products.edit')
+                ->with([
+                    'product' => $product, 
+                    'categories' => $categories, 
+                    'warehouses' => $warehouses
+                ]);
     }
 
     /**
@@ -87,6 +109,7 @@ class ProductsController extends Controller
         $product->purchase_price = $request->get('purchase_price');
         $product->sale_cost = $request->get('sale_cost');
         $product->category_id = $request->get('category_id');
+        $product->warehouse_id = $request->get('warehouse_id');
         $product->save();
         return redirect()->route('products.index');
     }
@@ -108,9 +131,16 @@ class ProductsController extends Controller
         return view('products.indexreports');
     }
 
-    public function reportAllProducts() {
+    public function reportAllProducts(Request $request) {
 
-        $products = Product::leftJoin('almacen as a', 'a.id', 'products._id');
+        $fecha_ini = $request->fecha_inicio;
+        $fecha_fin = $request->fecha_fin;
+        $products = Product::leftJoin('warehouses as wh', 'ws.id', '=', 'products.warehouse_id')
+                            ->leftJoin('categories as c', 'c.id', '=', 'products.category_id')
+                            ->where('created_at', '>', $fecha_ini)
+                            ->where('created_at', '<', $fecha_fin)
+                            ->select('products.*', 'c.description as category', 'wh.nombre')
+                            ->get();
         $fecha = new Carbon('America/La_paz');
         $date = $fecha->format('d-m-Y');
         $pdf = PDF::loadView('products.productsReport', 

@@ -45,7 +45,7 @@
                     <td style="border-color:#666666; border-top-style: dashed; border-right-style: dashed; border-width: 1px; padding: 2px">{{ $product->model }}</td>
                     <td style="border-color:#666666; border-top-style: dashed; border-right-style: dashed; border-width: 1px; padding: 2px">{{ $product->purchase_price }}</td>
                     <td style="border-color:#666666; border-top-style: dashed; border-right-style: dashed; border-width: 1px; padding: 2px">{{ $product->sale_cost }}</td>
-                    <td style="border-color:#666666; border-top-style: dashed; border-right-style: dashed; border-width: 1px; padding: 2px">{{ $product->category->description }}</td>                    
+                    <td style="border-color:#666666; border-top-style: dashed; border-right-style: dashed; border-width: 1px; padding: 2px">{{ $product->category }}</td>                    
                 </tr>
                 {{ $nro++ }}    
             @endforeach

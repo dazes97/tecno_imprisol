@@ -17,6 +17,7 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Marca</th>
                 <th scope="col">Modelo</th>
+                <th scope="col">Stock</th>
                 <th scope="col">Precio de Compra</th>
                 <th scope="col">Precio de Venta</th>
                 <th scope="col">Categoria</th>
@@ -31,6 +32,7 @@
                 <th>{{$product->name}}</th>
                 <th>{{$product->brand}}</th>
                 <th>{{$product->model}}</th>
+                <th>{{$product->stock}}</th>
                 <th>{{$product->purchase_price}}</th>
                 <th>{{$product->sale_cost}}</th>
                 <th>{{$product->category->description}}</th>

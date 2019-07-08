@@ -43,6 +43,14 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="almacen">Almacen</label>
+                        <select class="form-control" id="warehouse_id" name="warehouse_id">
+                            @foreach($warehouses as $row)
+                                <option value="{{$row->id}}">{{$row->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">Crear</button>
                 </form>
             </div>
