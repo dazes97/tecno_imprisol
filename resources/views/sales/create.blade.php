@@ -20,7 +20,7 @@
                         <input type="text" class="form-control" id="total_amount" name="total_amount">
                     </div>
                     <div class="form-group">
-                        <label for="order_id">Orden</label>
+                        <label for="order_id">Pedido</label>
                         <select class="form-control" id="order_id" name="order_id">
                             @foreach($orders as $row)
                                 <option value="{{$row->id}}">{{$row->code}}</option>

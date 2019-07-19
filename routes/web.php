@@ -62,6 +62,9 @@ Route::get('/home', 'HomeController@index')->name('home');
     Route::get('reports/purchases', ['as' => 'purchases.reports', 'uses' => 'PurchasesController@indexReport']);
     Route::post('reports/purchases', ['as' => 'purchases.generarrep', 'uses' => 'PurchasesController@generarReporte']);
 
+    Route::get('reports/producs', ['as' => 'purchases.reports', 'uses' => 'PurchasesController@indexReport']);
+    Route::post('reports/purchases', ['as' => 'purchases.generarrep', 'uses' => 'PurchasesController@generarReporte']);
+
     //ESTADISTICAS
     Route::get('statistics', ['as' => 'statistics.index', 'uses' => 'StatisticsController@index']);
 

@@ -159,5 +159,25 @@ class ProductsController extends Controller
        
     }
 
+    public function reporteVendidos() {
+
+        $products = Product::leftJoin('categories as c', 'c.id', '=', 'products.category_id')
+                    ->leftJoin('order__details as od', 'od.product_id', '=', 'products.id')
+                    ->select('products.*', 'c.description as category')
+                    ->get();
+        $fecha = new Carbon('America/La_paz');
+        $date = $fecha->format('d-m-Y');
+        $pdf = PDF::loadView('products.productsVendidos', 
+            ['products' => $products, 'fecha' => $date]
+        );
+        $pdf->setPaper('A4', 'landscape');
+        $pdf->output();        
+        $dom_pdf = $pdf->getDomPDF();
+        $canvas = $dom_pdf ->get_canvas();
+        $canvas->page_text(750, 570, "Pag. {PAGE_NUM} de {PAGE_COUNT}", null, 10, array(0, 0, 0));
+
+        return $pdf->stream('products.productsVendidos');
+    }
+
     
 }

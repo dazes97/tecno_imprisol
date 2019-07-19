@@ -5,9 +5,6 @@
         <a href="{{route('sales.create')}}">
             <button type="button" class="btn btn-primary">Registrar Venta</button>
         </a>
-        <!--<a href="{{route('report.product')}}">
-            <button type="button" class="btn btn-primary">Generar Reporte</button>
-        </a>-->
         <br>
         <table class="table">
             <thead>
